@@ -41,9 +41,7 @@ public class AccountHolder {
 			this.state = state;
 			this.zipcode = zipcode;
 		}
-		
-		/////////////////////////////////// GETTERS AND SETTERS ///////////////////////////////////
-		
+				
 		public String getPIN() {
 			return PIN;
 		}
