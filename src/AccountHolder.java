@@ -14,7 +14,6 @@ public class AccountHolder {
 		private String lastName;
 		private String PIN;
 		private String dob;
-		private String address;
 		private long telephone;
 		private String stAddress;
 		private String city;
@@ -29,12 +28,11 @@ public class AccountHolder {
 		 * @param address
 		 */
 		
-		public AccountHolder(String PIN, String firstName, String lastName, String dob, String address, long telephone, String stAddress, String city, String state, Long zipcode) {
+		public AccountHolder(String PIN, String firstName, String lastName, String dob, long telephone, String stAddress, String city, String state, long zipcode) {
 			this.PIN = PIN;
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.dob = dob;
-			this.address = address;
 			this.telephone = telephone;
 			this.stAddress = stAddress;
 			this.city = city;
@@ -66,24 +64,15 @@ public class AccountHolder {
 		public String getfirstName() {
 			return firstName;
 		}
-		public void setfirstName(String firstName) {
-			this.firstName = firstName;
-		}
+		
 		public String getlastName() {
 			return lastName;
 		}
-		public void setlastName(String lastName) {
-			this.lastName = lastName;
-		}
+		
 		public String getDOB() {
 			return dob;
 		}
-		public void setDOB(String dob) {
-			this.dob = dob;
-		}
-		public String getAddress() {
-			return address;
-		}
+		
 		public void setstAddress(String stAddress) {
 			this.stAddress = stAddress;
 		}

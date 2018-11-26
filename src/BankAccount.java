@@ -9,5 +9,73 @@
  */
 
 public class BankAccount {
+	private static long generatedAccountNumber = 100000001L;
 	
+	private long accountNumber;
+	private double balance;
+	private AccountHolder AccountHolder;
+	
+	public BankAccount(double balance, AccountHolder AccountHolder) {
+		this.accountNumber = BankAccount.generatedAccountNumber++;
+		this.balance = balance;
+		this.AccountHolder = AccountHolder;
+	}
+	
+	public long getAccountNumber() {
+		return accountNumber;
+	}
+	
+	public double getBalance() {
+		return balance;
+	}
+	
+	public AccountHolder getAccountHolder() {
+		return AccountHolder;
+	}
+
+	public void setAccountNumber(long accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	
+	
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	
+	public void setAccountHolder(AccountHolder AccountHolder) {
+		this.AccountHolder = AccountHolder;
+	}
+	
+
+	
+	public int deposit(double amount) {
+		if (amount <= 0) {
+			return 0;
+		} else {
+			balance = balance + amount;
+			return 1;
+		}
+	}
+	
+	public int withdraw(double amount) {
+		if (amount > balance) {
+			return 0;
+		} else if (amount <= 0) {
+			return 1;
+		} else {
+			balance = balance - amount;	
+			return 2;
+		}
+	}
+		
+		public int transfer(AccountHolder from, AccountHolder to, double amount) {
+			if (amount > balance) {
+				return 0;
+			} else if (amount <= 0) {
+				return 1;
+			} else {
+					
+				return 2;
+			}
+	}
 }
