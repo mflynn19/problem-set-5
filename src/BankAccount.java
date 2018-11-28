@@ -46,8 +46,6 @@ public class BankAccount {
 		this.AccountHolder = AccountHolder;
 	}
 	
-
-	
 	public int deposit(double amount) {
 		if (amount <= 0) {
 			return 0;
@@ -68,14 +66,14 @@ public class BankAccount {
 		}
 	}
 		
-		public int transfer(AccountHolder from, AccountHolder to, double amount) {
-			if (amount > balance) {
-				return 0;
-			} else if (amount <= 0) {
-				return 1;
-			} else {
-					
-				return 2;
-			}
+	public int transfer(AccountHolder from, AccountHolder to, double amount) {
+		if (amount > balance) {
+			return 0;
+		} else if (amount <= 0) {
+			return 1;
+		} else {
+			// transfer to other using withdraw from one and deposit from other	
+			return 2;
+		}
 	}
 }
