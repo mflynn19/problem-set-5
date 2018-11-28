@@ -20,14 +20,6 @@ public class AccountHolder {
 		private String state;
 		private long zipcode;
 		
-		/**
-		 * Constructor for AccountHolder class.
-		 * 
-		 * @param name
-		 * @param dob
-		 * @param address
-		 */
-		
 		public AccountHolder(String PIN, String firstName, String lastName, String dob, long telephone, String stAddress, String city, String state, long zipcode) {
 			this.PIN = PIN;
 			this.firstName = firstName;
