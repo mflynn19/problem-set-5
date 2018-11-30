@@ -12,29 +12,33 @@ import java.io.IOException;
 
 public class Database {
 	private String PIN;
-	private long zipcode;
+	private String zipcode;
 	private String firstName;
 	private String lastName;
 	private String dob;
-	private long telephone;
+	private String telephone;
 	private String stAddress;
 	private String state;
 	private String city;
+	private String temp;
+	private String accountNumber;
+	private Database result;
 
-	/*public BankAccount getBankAcc(String accountNumber) throws FileNotFoundException, IOException{
+	/*public BankAccount getBankAcc (String accountNumber) throws FileNotFoundException, IOException{
 		String firstName;
 		String lastName;
 		String PIN;
 		String dob;
-		long telephone;
+		String telephone;
 		String stAddress;
 		String city;
 		String state;
-		long zipcode;
-		int temp;
+		String zipcode;
+		String temp;
 		BankAccount result;
+		String accountStatus;
 	}
-	public Database(String PIN, String firstName, String lastName, String dob, long telephone, String stAddress, String city, String state, long zipcode) {
+	public Database(String PIN, String firstName, String lastName, String dob, String telephone, String stAddress, String city, String state, String zipcode, String temp, BankAccount result) {
 		this.PIN = PIN;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -44,6 +48,8 @@ public class Database {
 		this.city = city;
 		this.state = state;
 		this.zipcode = zipcode;
+		this.temp = temp;
+		this.result = result;
 	}
 	
 public Database autoCreate() throws FileNotFoundException, IOException {
@@ -51,13 +57,19 @@ public Database autoCreate() throws FileNotFoundException, IOException {
 		String line;
 		while ((line = br.readLine()) != null) {
 			temp = line.substring(0, 9);
-			accountNumber = Long.valueOf(temp);
-			
-			result = new Database(accountNumber , PIN, balance, firstName, lastName, dob, telephone, stAddress, city, state, zipcode);
-			
+			accountNumber = String.valueOf(temp);
+			PIN = line.substring(9,13);
+			firstName = line.substring(28, 48);
+			lastName = line.substring(48,  63);
+			dob = line.substring(63,  71);
+			telephone = line.substring(71, 81);
+			stAddress = line.substring(81, 111);
+			city = line.substring(111, 141);
+			state = line.substring(141, 143);
+			zipcode = line.substring(143, 148);
+			result = new Database(accountNumber , PIN, firstName, lastName, dob, telephone, stAddress, city, state, zipcode);
 		}
-	}
 	return result;
+
+	}*/
 }
-*/
-	}
