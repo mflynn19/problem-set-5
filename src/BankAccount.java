@@ -7,18 +7,23 @@
  * implemented last time. You can always reference my Github repository
  * for inspiration (https://github.com/rwilson-ucvts/java-sample-atm).
  */
+import java.security.InvalidParameterException;
 
-public class BankAccount {
-	private static long generatedAccountNumber = 100000001L;
-	
-	private long accountNumber;
+public class BankAccount {	
 	private double balance;
+	private long accountNumber;
 	private AccountHolder AccountHolder;
 	
-	public BankAccount(double balance, AccountHolder AccountHolder) {
-		this.accountNumber = BankAccount.generatedAccountNumber++;
+	public BankAccount(long accountNumber, double balance, AccountHolder AccountHolder) {
+		this.accountNumber = accountNumber;
 		this.balance = balance;
 		this.AccountHolder = AccountHolder;
+	}
+	
+	public BankAccount(AccountHolder AccountHolder) {
+		this.balance = 0;
+		this.AccountHolder = AccountHolder;
+		
 	}
 	
 	public long getAccountNumber() {
@@ -66,14 +71,19 @@ public class BankAccount {
 		}
 	}
 		
-	public int transfer(AccountHolder from, AccountHolder to, double amount) {
+	public BankAccount transfer(BankAccount receiever, double amount) {
 		if (amount > balance) {
-			return 0;
+			throw new InvalidParameterException("You cannot transfer more money than you have.");
 		} else if (amount <= 0) {
-			return 1;
-		} else {
-			// transfer to other using withdraw from one and deposit from other	
-			return 2;
+			throw new InvalidParameterException("Invalid tarnsfer amount.");
+		} 
+		else {
+			if(receiever == null) {
+				System.out.println("Transfer account does not exist");
+			}
+			this.withdraw(amount);
+			receiever.deposit(amount);
+			return receiever;
 		}
 	}
 }
