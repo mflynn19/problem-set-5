@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class ATM {
 	private BankAccount acc;
-	//private Database database;
+	private Database database;
 	private Scanner in = new Scanner(System.in);
 	private BankAccount currentAccount = null;
 
@@ -104,6 +104,9 @@ public class ATM {
 							System.out.println("Account has been closed.");
 						case 8:
 							//save edits
+							System.out.println("Logging out");
+							//this.database.updateAccount(this.currentAccount);
+							this.currentAccount = null;
 							
 						case 9:
 							System.out.println("Thank you for visiting the bank of UCVTS! Goodbye!");
@@ -116,7 +119,7 @@ public class ATM {
 			}
 	}
 		else if (i == 2) {
-			//somehow summon hell to transfer funds
+			//somehow summon hell to create a new account
 		}
 	}
 
