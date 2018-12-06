@@ -75,7 +75,7 @@ public class BankAccount {
 		if (amount > balance) {
 			throw new InvalidParameterException("You cannot transfer more money than you have.");
 		} else if (amount <= 0) {
-			throw new InvalidParameterException("Invalid tarnsfer amount.");
+			throw new InvalidParameterException("Invalid transfer amount.");
 		} 
 		else {
 			if(receiever == null) {

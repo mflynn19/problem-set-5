@@ -111,12 +111,14 @@ public class AccountHolder {
 			System.out.println("What would you like to update? 1 for PIN, 2 for telephone, 3 for address");
 			switch (in.nextLine().toLowerCase().charAt(0)) {
 			case '1': 
+				this.setPIN(PIN);
+				//do commands to get opin and change t new pin
 				//somehow call the update pin function? not working
 			case '2':
 				System.out.println("What is your updated telephone number?");
 				this.settelephone(in.nextLine());
 				return true;
-			case 3:
+			case '3':
 				System.out.println("What is your new street address?");
 				stAddress = in.nextLine();
 				System.out.println("What is your new city named?");

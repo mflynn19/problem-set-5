@@ -10,16 +10,19 @@
  * for inspiration (https://github.com/rwilson-ucvts/java-sample-atm).
  */
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ATM {
 	private BankAccount acc;
 	private Database database;
+	//private AccountHolder ach;
 	private Scanner in = new Scanner(System.in);
 	private BankAccount currentAccount = null;
 
 	public ATM(BankAccount acc) {
 		this.acc = acc;
+		//this.ach = ach;
 	}
 	
 	public void deposit() {
@@ -36,7 +39,7 @@ public class ATM {
 	}
 	
 	public void menu() {
-		System.out.println("Welcome to the bank of UCVTS. If you have an account please select 1. Otherwise select 2 to create an account");
+		System.out.println("Welcome to the bank of UCVTS. If you have an account please select 1. Otherwise select 2 to create an account. Select 3 to quit.");
 		long i = in.nextLong();
 		in.nextLine();
 		if (i == 1) {
@@ -85,6 +88,20 @@ public class ATM {
 							break;
 						case 4:
 							//transfer
+							/*System.out.println("What account would you like to transfer to?");
+							Double reciever = in.nextDouble();
+							if (reciever == acc.MaxAccountNumber()){
+								//use database to return BankAccount associated with receiver account ID
+							}
+							in.nextLine();
+							System.out.println("How much money would you like to transfer?");
+							double amount = in.nextDouble();
+							in.nextLine();
+							double que = acc.transfer(acc.receiever, amount);
+							if (what == 0) {
+								System.out.println("Cannot deposit value.");
+							}
+							acc.transfer();*/
 						case 5:
 							//view info
 							this.currentAccount.getAccountHolder().printpersonalInfo();
@@ -92,21 +109,22 @@ public class ATM {
 							break;
 						case 6:
 							//edit info
-							int j = in.nextInt();
-							in.nextLine();
-							if (j == Integer.parseInt(acc.getAccountHolder().getPIN())) {
-								while (!this.currentAccount.getAccountHolder().updatePersonalInfo(in)) ;
-								//this.database.updateAccount(this.currentAccount);
-								break;
-							}
+							
+					
 						case 7:
 							//close account?
+							
 							System.out.println("Account has been closed.");
 						case 8:
 							//save edits
 							System.out.println("Logging out");
-							//this.database.updateAccount(this.currentAccount);
-							this.currentAccount = null;
+							try {
+								this.database.updateAccount(this.currentAccount, null);
+							}
+							catch(IOException e) {
+								System.out.println("Could not update account!!!");
+							}
+								this.currentAccount = null;
 							
 						case 9:
 							System.out.println("Thank you for visiting the bank of UCVTS! Goodbye!");
@@ -120,6 +138,9 @@ public class ATM {
 	}
 		else if (i == 2) {
 			//somehow summon hell to create a new account
+		}
+		else {
+			System.out.println("Goodbye!");
 		}
 	}
 
