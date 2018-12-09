@@ -33,7 +33,45 @@ public class AccountHolder {
 			this.state = state;
 			this.zipcode = zipcode;
 		}
-				
+		
+		void User (Scanner in) {
+			System.out.print("Please enter your first name.");
+			firstName = in.nextLine();
+			System.out.print("Please enter your last name");
+			lastName = in.nextLine();
+			while (dob.length() != 8) {
+				System.out.print("Please enter your date of birth in the following format: YYYYMMDD");
+				dob = in.nextLine();
+				if (String.valueOf(dob).length() != 8) {
+					System.out.println("Please enter your date of birth in the correct format.");
+				}
+			}
+			while (telephone.length() != 10) {
+				System.out.print("Please enter your telephone number; ten digits only.");
+				telephone = in.nextLine();
+				if (String.valueOf(telephone).length() != 10) {
+					System.out.println("Invalid telephone number length.");
+				}
+			}
+			System.out.print("What is your street address?");
+			stAddress = in.nextLine();
+			System.out.print("What is the city/town called that you reside in?");
+			city = in.nextLine();
+			while (zipcode.length() != 5)
+				System.out.print("What is your resident state abbreviated as (ex. New Jersey should be typed as NJ)?");
+				state = in.nextLine();
+				if (String.valueOf(state).length() != 2) {
+					System.out.println("Invalid state abbreviaion. Example: New Jersey should be typed as NJ");
+				}
+			while (String.valueOf(PIN).length() != 4) {
+					System.out.print("Enter a 4 digit numerical PIN.");
+					PIN = in.nextLine();
+					if (String.valueOf(PIN).length() != 4 ){
+						System.out.println("Invalid PIN");
+					}
+					}
+		}
+		
 		public String getPIN() {
 			return PIN;
 		}
@@ -112,8 +150,20 @@ public class AccountHolder {
 			switch (in.nextLine().toLowerCase().charAt(0)) {
 			case '1': 
 				this.setPIN(PIN);
+<<<<<<< HEAD
+				System.out.println("What is your current PIN?");
+				int opin = in.nextInt();
+				if (Integer.toString(opin) == PIN) {
+					System.out.println("Please enter your new PIN.");
+					String nPIN = in.nextLine();
+					if (nPIN.matches("\\d\\d\\d\\d")) {
+						this.PIN = nPIN;
+				}
+			}		
+=======
 				//do commands to get opin and change t new pin
 				//somehow call the update pin function? not working
+>>>>>>> 3e2ea194c070ebf9c47145e7e8a41da354e95f48
 			case '2':
 				System.out.println("What is your updated telephone number?");
 				this.settelephone(in.nextLine());
@@ -133,4 +183,5 @@ public class AccountHolder {
 				return false;
 		}
 	}
+	
 }

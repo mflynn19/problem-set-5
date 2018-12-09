@@ -20,9 +20,13 @@ public class ATM {
 	private Scanner in = new Scanner(System.in);
 	private BankAccount currentAccount = null;
 
-	public ATM(BankAccount acc) {
+	public ATM(BankAccount acc, AccountHolder ach) {
 		this.acc = acc;
+<<<<<<< HEAD
+		
+=======
 		//this.ach = ach;
+>>>>>>> 3e2ea194c070ebf9c47145e7e8a41da354e95f48
 	}
 	
 	public void deposit() {
@@ -37,10 +41,15 @@ public class ATM {
 			acc.setBalance(acc.getBalance() - k);
 		}
 	}
-	
+		
 	public void menu() {
+<<<<<<< HEAD
+		System.out.println("Welcome to the Bank of UCVTS. If you have an account please select 1. Otherwise select 2 to create an account. Select 3 to quit.");
+		int i = in.nextInt();
+=======
 		System.out.println("Welcome to the bank of UCVTS. If you have an account please select 1. Otherwise select 2 to create an account. Select 3 to quit.");
 		long i = in.nextLong();
+>>>>>>> 3e2ea194c070ebf9c47145e7e8a41da354e95f48
 		in.nextLine();
 		if (i == 1) {
 			if (i == acc.getAccountNumber()) {
@@ -48,13 +57,14 @@ public class ATM {
 				int n = in.nextInt();
 				in.nextLine();
 				if (n == Integer.parseInt(acc.getAccountHolder().getPIN())) {
-					int select = 0;
-					while (select != 4) {
+					String select = "";
+					while (select != "9") {
 						System.out.println("Please select 1 to withdraw; 2 to deposit; 3 to see your account balance; 4 to transfer funds ; 5 to view your personal information; "
 								+ "6 to edit your personal information; 7 to close your account; 8 to Save Changes and Log Out; 9 to exit.");
-						select = in.nextInt();
-						switch(select) {	
-						case 1:
+					try {
+						select = in.nextLine();
+						switch(select) {
+						case "1":
 							System.out.println("How much money would you like to withdraw?");
 							double want = in.nextDouble();
 							in.nextLine();
@@ -70,7 +80,7 @@ public class ATM {
 							}
 							break;
 	
-						case 2:
+						case "2":
 							System.out.println("How much money would you like to deposit?");
 							double addition = in.nextDouble();
 							in.nextLine();
@@ -83,11 +93,30 @@ public class ATM {
 							}
 							break;
 	
-						case 3:
-							System.out.println("Your current balance is " + acc.getBalance() + " .");
+						case "3":
+							System.out.println("Your current balance is " + String.format("%,10.2f", currentAccount.getBalance()) + " .");
 							break;
-						case 4:
+						case "4":
 							//transfer
+<<<<<<< HEAD
+							System.out.println("What account would you like to transfer to?");
+							Long comparison = database.getMaxAccountNumber();
+							Long reciever = in.nextLong();
+							in.nextLine();
+							if (reciever == comparison){
+								System.out.println("How much money would you like to transfer?");
+								double amount = in.nextDouble();
+								in.nextLine();
+								//runs through checks in AccountHolder hopefully
+								acc.transfer(database.getAccount(comparison), amount);
+								//fix below
+								//this.database.updateAccount(this.currentAccount.transfer(database.getAccount(), amount));
+							}
+							else {
+								System.out.println("Account does not exist.");
+							}
+						case "5":
+=======
 							/*System.out.println("What account would you like to transfer to?");
 							Double reciever = in.nextDouble();
 							if (reciever == acc.MaxAccountNumber()){
@@ -103,12 +132,34 @@ public class ATM {
 							}
 							acc.transfer();*/
 						case 5:
+>>>>>>> 3e2ea194c070ebf9c47145e7e8a41da354e95f48
 							//view info
 							this.currentAccount.getAccountHolder().printpersonalInfo();
 							in.nextLine();
 							break;
-						case 6:
+						case "6":
 							//edit info
+<<<<<<< HEAD
+							while (!this.currentAccount.getAccountHolder().updatePersonalInfo(in)) ;
+							try {
+								this.database.updateAccount(this.currentAccount, null);
+							} catch (IOException e1) {
+								System.out.println("Please try again.");
+								e1.printStackTrace();
+							}
+							break;
+						case "7":
+							//close account?
+							System.out.println("To close your account with the Bank of UCVTS please press 1; to cancel press 2.");
+							int k = in.nextInt();
+							if (k == 2) {
+								return;
+							}
+							else if (k == 1) {
+							currentAccount.setOpen("N");
+							}
+						case "8":
+=======
 							
 					
 						case 7:
@@ -116,6 +167,7 @@ public class ATM {
 							
 							System.out.println("Account has been closed.");
 						case 8:
+>>>>>>> 3e2ea194c070ebf9c47145e7e8a41da354e95f48
 							//save edits
 							System.out.println("Logging out");
 							try {
@@ -125,29 +177,47 @@ public class ATM {
 								System.out.println("Could not update account!!!");
 							}
 								this.currentAccount = null;
+<<<<<<< HEAD
+						case "9":
+							in.close();
+							if (currentAccount != null) {
+								try {
+									this.database.updateAccount(this.currentAccount, null);
+								} catch (IOException e) {
+									System.out.println("Please try again.");
+									e.printStackTrace();
+								}							}
+=======
 							
 						case 9:
+>>>>>>> 3e2ea194c070ebf9c47145e7e8a41da354e95f48
 							System.out.println("Thank you for visiting the bank of UCVTS! Goodbye!");
+						
+						default:
+							System.out.println("Please enter a valid request.");
 						}
 					}
-				}
-			}
-			else {
+			catch (StringIndexOutOfBoundsException e) {
 				System.out.println("Please reenter your account information.");
+			}
+				}
 			}
 	}
 		else if (i == 2) {
-			//somehow summon hell to create a new account
+			/*try {
+				this.createAccount();
+			}
+			catch (IOException e) {
+				System.out.println("Error. Try again.");
+			}
+			break;*/	
+		}
+		else {
+			System.out.println("Goodbye!");
+		}
 		}
 		else {
 			System.out.println("Goodbye!");
 		}
 	}
-
-public static void main(String[] args) {	
-	
-	ATM atm = new ATM(new BankAccount(0, 0, new AccountHolder("1234","Ryan", "Wilson","January 1, 1970", "1012023003", "123 Main St", "Scotch Plains", "NJ", "105007076")));
-	atm.menu();
-	
-}
 }

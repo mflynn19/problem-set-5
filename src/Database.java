@@ -53,7 +53,7 @@ public class Database {
 	/**
 	 * Retrieves an account by account number.
 	 * 
-	 * @param accountNumber the account number of the account to retrieve
+	 * @param accountNumber the a number of the account to retrieve
 	 * @return a BankAccount
 	 */
 	
@@ -123,4 +123,6 @@ public class Database {
 		
 		return max;
 	}
+	
+	
 }
