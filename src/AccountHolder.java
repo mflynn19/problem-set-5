@@ -24,7 +24,7 @@ public class AccountHolder {
 		
 		public AccountHolder(String PIN, String firstName, String lastName, String dob, String telephone, String stAddress, String city, String state, String zipcode) {
 			this.PIN = PIN;
-			this.firstName = firstName;
+			this.firstName = firstName; 
 			this.lastName = lastName;
 			this.dob = dob;
 			this.telephone = telephone;
@@ -34,7 +34,7 @@ public class AccountHolder {
 			this.zipcode = zipcode;
 		}
 		
-		void User (Scanner in) {
+		/*public void newUser (Scanner in) {
 			System.out.print("Please enter your first name.");
 			firstName = in.nextLine();
 			System.out.print("Please enter your last name");
@@ -70,7 +70,7 @@ public class AccountHolder {
 						System.out.println("Invalid PIN");
 					}
 					}
-		}
+		}*/
 		
 		public String getPIN() {
 			return PIN;

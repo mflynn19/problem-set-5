@@ -59,12 +59,16 @@ public class BankAccount {
 		this.AccountHolder = AccountHolder;
 	}
 	
-	void deposit(double amount) {
-		if (amount <= 0)
+	public double deposit(double amount) {
+		if (amount <= 0) {
 			throw new InvalidParameterException("Deposit amount is too low");
-		if (balance + amount > 999999999999.99)
+		}
+		if (balance + amount > 999999999999.99) {
 			throw new InvalidParameterException("Deposit amount is too high");
-		balance += amount;
+		}
+		else {
+			return balance += amount;
+		}
 	}
 	
 	void withdraw(double amount) {
