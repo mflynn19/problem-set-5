@@ -150,20 +150,9 @@ public class AccountHolder {
 			switch (in.nextLine().toLowerCase().charAt(0)) {
 			case '1': 
 				this.setPIN(PIN);
-<<<<<<< HEAD
-				System.out.println("What is your current PIN?");
-				int opin = in.nextInt();
-				if (Integer.toString(opin) == PIN) {
-					System.out.println("Please enter your new PIN.");
-					String nPIN = in.nextLine();
-					if (nPIN.matches("\\d\\d\\d\\d")) {
-						this.PIN = nPIN;
-				}
-			}		
-=======
+
 				//do commands to get opin and change t new pin
 				//somehow call the update pin function? not working
->>>>>>> 3e2ea194c070ebf9c47145e7e8a41da354e95f48
 			case '2':
 				System.out.println("What is your updated telephone number?");
 				this.settelephone(in.nextLine());
