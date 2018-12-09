@@ -17,7 +17,7 @@ public class Tester {
 		 * from our very primitive database (i.e., a flat-file). After making changes, of course,
 		 * you'll need to update the database accordingly.
 		 */
-		//ATM ATM = new ATM();
-		//ATM.menu();
+		ATM ATM = new ATM();
+		ATM.menu();
 	}
 }
