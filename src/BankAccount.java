@@ -59,31 +59,28 @@ public class BankAccount {
 		this.AccountHolder = AccountHolder;
 	}
 	
-	public int deposit(double amount) {
-		if (amount <= 0) {
-			return 0;
-		} else {
-			balance = balance + amount;
-			return 1;
-		}
+	void deposit(double amount) {
+		if (amount <= 0)
+			throw new InvalidParameterException("Deposit amount is too low");
+		if (balance + amount > 999999999999.99)
+			throw new InvalidParameterException("Deposit amount is too high");
+		balance += amount;
 	}
 	
-	public int withdraw(double amount) {
-		if (amount > balance) {
-			return 0;
-		} else if (amount <= 0) {
-			return 1;
-		} else {
-			balance = balance - amount;	
-			return 2;
-		}
+	void withdraw(double amount) {
+		if (balance >= amount && amount > 0)
+			balance -= amount;
+		else if (0 > amount)
+			throw new InvalidParameterException("Cannot withdraw that amount.");
+		else
+			throw new InvalidParameterException("Insufficient funds.");
 	}
 		
 	public BankAccount transfer(BankAccount receiever, double amount) {
 		if (amount > balance) {
 			throw new InvalidParameterException("You cannot transfer more money than you have.");
 		} else if (amount <= 0) {
-			throw new InvalidParameterException("Invalid transfer amount.");
+			throw new InvalidParameterException("Invalid tarnsfer amount.");
 		} 
 		else {
 			if(receiever == null) {

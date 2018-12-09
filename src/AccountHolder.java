@@ -139,6 +139,7 @@ public class AccountHolder {
 		public String gettelephone() {
 			return telephone;
 		}
+		
 		public void printpersonalInfo() {
 			System.out.println(firstName + " " + lastName);
 			System.out.println(dob);
@@ -150,9 +151,15 @@ public class AccountHolder {
 			switch (in.nextLine().toLowerCase().charAt(0)) {
 			case '1': 
 				this.setPIN(PIN);
-
-				//do commands to get opin and change t new pin
-				//somehow call the update pin function? not working
+				System.out.println("What is your current PIN?");
+				int opin = in.nextInt();
+				if (Integer.toString(opin) == PIN) {
+					System.out.println("Please enter your new PIN.");
+					String nPIN = in.nextLine();
+					if (nPIN.matches("\\d\\d\\d\\d")) {
+						this.PIN = nPIN;
+				}
+			}		
 			case '2':
 				System.out.println("What is your updated telephone number?");
 				this.settelephone(in.nextLine());
