@@ -7,7 +7,6 @@
  * implemented last time. You can always reference my Github repository
  * for inspiration (https://github.com/rwilson-ucvts/java-sample-atm).
  */
-import java.security.InvalidParameterException;
 
 public class BankAccount {	
 	private double balance;
@@ -51,38 +50,44 @@ public class BankAccount {
 	
 	public double deposit(double amount) {
 		if (amount <= 0) {
-			throw new InvalidParameterException("Deposit amount is too low");
+			return 0;
 		}
 		if (balance + amount > 999999999999.99) {
-			throw new InvalidParameterException("Deposit amount is too high");
+			return 1;
 		}
 		else {
-			return balance += amount;
+			setBalance(balance += amount);
+			return 2;
 		}
 	}
 	
-	void withdraw(double amount) {
-		if (balance >= amount && amount > 0)
+	public double withdraw(double amount) {
+		if (balance >= amount && amount > 0) {
 			balance -= amount;
-		else if (0 > amount)
-			throw new InvalidParameterException("Cannot withdraw that amount.");
-		else
-			throw new InvalidParameterException("Insufficient funds.");
+			return 2;
+		}
+		else if (0 > amount) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 		
-	public BankAccount transfer(BankAccount receiever, double amount) {
-		if (amount > balance) {
-			throw new InvalidParameterException("You cannot transfer more money than you have.");
-		} else if (amount <= 0) {
-			throw new InvalidParameterException("Invalid tarnsfer amount.");
+	public double transfer(BankAccount receiever, double much) {
+		if (much > balance) {
+			return 0;
+		} 
+		else if (much <= 0) {
+			return 1;
 		} 
 		else {
 			if(receiever == null) {
 				System.out.println("Transfer account does not exist");
 			}
-			this.withdraw(amount);
-			receiever.deposit(amount);
-			return receiever;
+			this.withdraw(much);
+			receiever.deposit(much);
+			return 2;
 		}
 	}
 	
