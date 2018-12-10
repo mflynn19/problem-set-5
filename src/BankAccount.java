@@ -93,6 +93,7 @@ public class BankAccount {
 	
 	public BankAccount(String account) {
 		this.accountNumber = Long.parseLong(account.substring(0, 9));
+		this.balance = Double.parseDouble(account.substring(13, 28));
 		this.AccountHolder = new AccountHolder(
 				account.substring(9, 13), 
 						account.substring(28, 48),
@@ -102,13 +103,14 @@ public class BankAccount {
 						account.substring(81, 111),
 						account.substring(111, 141),
 						account.substring(141, 143),
-						account.substring(143, 148)
+						account.substring(143, 148),
+						account.charAt(148)
 		);
 			
 		}
 	@Override
 	public String toString() {
-		return String.format("%09s%04s%-15.2s%-20s%-15s%-8s%10s%-30s%-30s%-2s%-5s%s", accountNumber, AccountHolder.getPIN(), 
+		return String.format("%09d%4s%-15.2f%-20s%-15s%-8s%10s%-30s%-30s%-2s%-5s%s", accountNumber, AccountHolder.getPIN(), 
 				balance, AccountHolder.getlastName(), AccountHolder.getfirstName(), AccountHolder.getDOB(), AccountHolder.gettelephone(),
 				AccountHolder.getstAddress(),AccountHolder.getcity(), AccountHolder.getstate(), AccountHolder.getzipcode(), AccountHolder.getOpen() );
 	}

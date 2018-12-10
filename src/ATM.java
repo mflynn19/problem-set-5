@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -39,8 +40,20 @@ public class ATM {
 				Long testNum = (long) 0;
 				String testPin = "";
 				double returnval = 0;
-				System.out.println("Please enter your account number.");
-				testNum = in.nextLong();
+				
+				do {
+					System.out.println("Please enter your account number.");
+					try {
+						testNum = in.nextLong();
+					}
+					catch(InputMismatchException e) {
+						System.out.println("Invalid input.");
+					}
+					finally {
+						in.nextLine();
+					}
+				} while (String.valueOf(testNum).length() != 9);
+				
 				BankAccount = database.getAccount(testNum);
 				
 				Scanner textscan= new Scanner(System.in);
@@ -48,21 +61,21 @@ public class ATM {
 				testPin = textscan.nextLine();
 
 				while(!(testPin.equals(BankAccount.getAccountHolder().getPIN()))){
-					System.out.println("Please enter your correct account number.");
-					testNum = in.nextLong();
+					System.out.println("Please enter your correct PIN.");
+					testPin = in.nextLine();
 					BankAccount = database.getAccount(testNum);
-					System.out.print("Please enter your correct PIN.");
-					testPin = textscan.nextLine();
 				}
 					System.out.println("Please select 1 to deposit; 2 to withdraw; 3 to see your account balance; 4 to transfer funds ; 5 to view your personal information;" + 
 							"					+ \"6 to edit your personal information; 7 to close your account; 8 to Save Changes and exit.");
-					char select = in.next().charAt(0);
+					char select;
+					do {
+					select = in.next().charAt(0);
 					switch (select) {
 						case '1':
 							//deposit
 							System.out.println("How much money would you like to deposit?");
 							Double amount = in.nextDouble();
-							this.BankAccount.deposit(amount);
+							//this.BankAccount.deposit(amount);
 							returnval = BankAccount.deposit(amount);
 							if(returnval == 0){
 								System.out.println("Invalid deposit amount.");
@@ -71,8 +84,9 @@ public class ATM {
 								System.out.println("Unable to complete transaction. Please see a bank teller.");
 							}
 							else {
-								System.out.println(BankAccount.getBalance());
+								System.out.println("Your balance is "  + BankAccount.getBalance());
 							}
+							//go back to menu
 							break;
 						case '2':
 							//withdraw
@@ -84,8 +98,9 @@ public class ATM {
 								System.out.println("Invalid withdraw amount.");
 							}
 							else if (returnval == 2){
-								System.out.println(BankAccount.getBalance());
+								System.out.println("Your balance is" + BankAccount.getBalance());
 							}
+							//go back to menu
 							break;
 						case '3':
 							//transfer
@@ -124,15 +139,18 @@ public class ATM {
 								System.out.println("Thanks for that!");
 							}
 							else if (p == 1) {
-								AccountHolder.setOpen("N");
+								AccountHolder.setOpen('N');
 							}
-							
+							break;
 						case '8':
 							//log out and save
 							System.out.println("Logging out");
 							this.database.updateAccount(this.currentAccount, destination);
 							this.currentAccount = null;
+							break;
 						}
+					}while (select != '7' || select != '8');
+					
 					
 			case '2':
 				Scanner nuevo = new Scanner(System.in);
@@ -149,20 +167,20 @@ public class ATM {
 				
 				System.out.println("Welcome to the Bank of UCVTS! Enter the information below to open an account.");
 				do {
-					System.out.print("Please enter your first name. 15 characters max");
-					firstname = nuevo.nextLine();
-				}
-				while (firstname.length() > 15);
-				firstname = rPAD(firstname, 15);
-
-				do {
-					System.out.print("Please enter your last name");
+					System.out.print("Please enter your last name. 20 characters max.");
 					String lastName = nuevo.nextLine();
 					lastname = lastName;
 				}
 				while (lastname.length() > 20);
 				lastname = rPAD(lastname, 20);
 				
+				do {
+					System.out.print("Please enter your first name. 10 characters max.");
+					firstname = nuevo.nextLine();
+				}
+				while (firstname.length() > 15);
+				firstname = rPAD(firstname, 15);
+
 				do {
 					System.out.print("Please enter your date of birth in the following format: YYYYMMDD");
 					dob = nuevo.nextLine();
@@ -216,13 +234,29 @@ public class ATM {
 				
 				long accountnumber = database.getMaxAccountNumber() + 1;
 				
+//				String test = accountnumber + pinnum + balance + lastname + firstname + dob + telephone + address + city + state + postalcode + "Y";
+//				System.out.println("accountnumber length is " + String.valueOf(accountnumber).length());
+//				System.out.println("pin length is " + pinnum.length());
+//				System.out.println("balance length is " + balance.length());
+//				System.out.println("lastname length is " + lastname.length());
+//				System.out.println("firstname length is " + firstname.length());
+//				System.out.println("dob length is " + dob.length());
+//				System.out.println("telephone length is " + telephone.length());
+//				System.out.println("address length is " + address.length());
+//				System.out.println("city length is " + city.length());
+//				System.out.println("state length is " + state.length());
+//				System.out.println("postalcode length is " + postalcode.length());
+//				System.out.println("test is " + test.length());
+//				System.out.println(test);
+////				System.out.println("char: " + test.charAt(148));
 				BankAccount newacc = new BankAccount(accountnumber + pinnum + balance + lastname + firstname + dob + telephone + address + city + state + postalcode + "Y");
+//				System.out.println(newacc.toString());
 				database.updateAccount(newacc, destination);
-				System.out.println("Welcome to the Bank! Your account number is" + accountnumber);
+				System.out.println("Welcome to the Bank! Your account number is " + accountnumber);
 				menu();
 				break;
             case '3':
-    			BankAccount.getAccountHolder().setOpen("N");
+    			BankAccount.getAccountHolder().setOpen('N');
             	database.updateAccount(BankAccount, destination);
             	System.out.println("Your account has been closed! thank you for doing business with us!");
                 break;

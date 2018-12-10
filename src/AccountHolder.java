@@ -21,9 +21,9 @@ public class AccountHolder {
 		private String city;
 		private String state;
 		private String zipcode;
-		private String open;
+		private char open;
 		
-		public AccountHolder(String PIN, String firstName, String lastName, String dob, String telephone, String stAddress, String city, String state, String zipcode) {
+		public AccountHolder(String PIN, String lastName, String firstName, String dob, String telephone, String stAddress, String city, String state, String zipcode, char open) {
 			this.PIN = PIN;
 			this.firstName = firstName; 
 			this.lastName = lastName;
@@ -104,11 +104,11 @@ public class AccountHolder {
 			return telephone;
 		}
 		
-		public String getOpen() {
+		public char getOpen() {
 			return open;
 		}
 		
-		public void setOpen(String open) {
+		public void setOpen(char open) {
 			this.open = open;
 		}
 		
