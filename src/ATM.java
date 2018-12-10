@@ -222,24 +222,15 @@ public class ATM {
 				menu();
 				break;
             case '3':
-                close();
+    			BankAccount.getAccountHolder().setOpen("N");
+            	database.updateAccount(BankAccount, destination);
+            	System.out.println("Your account has been closed! thank you for doing business with us!");
                 break;
-		}
-			
-	}
-
-    
-
-	public void close() {
-		in.close();
-		if (currentAccount != null) {
-			try {
-				database.updateAccount(currentAccount, destination);
-			} catch (IOException e) {
-				System.out.println("There's been an error. Please try again.");
-				e.printStackTrace();
-			}
+            default:
+            	System.out.println("Please choose a viable option!");
+            	menu();
 		}
 		System.out.println("Thank you for using this ATM");
+		in.close();
 	}
 }

@@ -107,8 +107,8 @@ public class BankAccount {
 			
 		}
 	public String toString() {
-		return String.format("%09%04d%-15.2f%-20s%-15s%-8s%10d%-30s%-30s%-2s%-5s%s", accountNumber, AccountHolder.getPIN(), 
-				balance, AccountHolder.getfirstName(), AccountHolder.getlastName(), AccountHolder.getDOB(), AccountHolder.gettelephone(),
+		return String.format("%09s%04s%-15.2s%-20s%-15s%-8s%10s%-30s%-30s%-2s%-5s%s", accountNumber, AccountHolder.getPIN(), 
+				balance, AccountHolder.getlastName(), AccountHolder.getfirstName(), AccountHolder.getDOB(), AccountHolder.gettelephone(),
 				AccountHolder.getstAddress(),AccountHolder.getcity(), AccountHolder.getstate(), AccountHolder.getzipcode(), AccountHolder.getOpen() );
 	}
 	}
