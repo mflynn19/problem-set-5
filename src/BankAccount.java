@@ -13,13 +13,11 @@ public class BankAccount {
 	private double balance;
 	private long accountNumber;
 	private AccountHolder AccountHolder;
-	private String open;
 	
-	public BankAccount(long accountNumber, double balance, AccountHolder AccountHolder, String open) {
+	public BankAccount(long accountNumber, double balance, AccountHolder AccountHolder) {
 		this.accountNumber = accountNumber;
 		this.balance = balance;
 		this.AccountHolder = AccountHolder;
-		this.open = open;
 	}
 	
 	public BankAccount(AccountHolder AccountHolder) {
@@ -41,14 +39,6 @@ public class BankAccount {
 
 	public void setAccountNumber(long accountNumber) {
 		this.accountNumber = accountNumber;
-	}
-	
-	public String getOpen() {
-		return open;
-	}
-	
-	public void setOpen(String open) {
-		this.open = open;
 	}
 	
 	public void setBalance(double balance) {
@@ -114,6 +104,6 @@ public class BankAccount {
 	public String toString() {
 		return String.format("%09%04d%-15.2f%-20s%-15s%-8s%10d%-30s%-30s%-2s%-5s%s", accountNumber, AccountHolder.getPIN(), 
 				balance, AccountHolder.getfirstName(), AccountHolder.getlastName(), AccountHolder.getDOB(), AccountHolder.gettelephone(),
-				AccountHolder.getstAddress(),AccountHolder.getcity(), AccountHolder.getstate(), AccountHolder.getzipcode() );
+				AccountHolder.getstAddress(),AccountHolder.getcity(), AccountHolder.getstate(), AccountHolder.getzipcode(), AccountHolder.getOpen() );
 	}
 	}

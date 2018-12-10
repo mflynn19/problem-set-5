@@ -17,49 +17,32 @@ import java.util.Scanner;
  */
 
 public class ATM {
-	private BankAccount currentAccount = null;
-	public BankAccount BankAccount;
+	private BankAccount currentAccount;
+	private BankAccount BankAccount;
 	public AccountHolder AccountHolder;
 	private Database database;
 	private static Scanner in = new Scanner(System.in);
 	
-	public void menu() {
-		while (!this.menu('a'));
-	}
-	
-	private boolean menu(char a) {
+	public void menu() throws IOException{
 		System.out.println("Welcome to the Bank of UCVTS! Please select 1 if you already have an account. Select 2 to create a new account. Select 3 to exit.");
 		switch (in.nextLine().charAt(0)) {
 			case '1':
-				 Long testNum;
-				    Integer testPin;
-					while (this.currentAccount == null) {
-						System.out.println("Please enter your account number.");
-						testNum = null;
-						try {
-						    testNum = in.nextLong();
-			            }
-						catch (InputMismatchException e) {
-						    System.out.println("Invalid account number");
-							in.nextLine();
-						    continue;
-			            }
-						System.out.println("Please enter your PIN.");
-						testPin = null;
-						try {
-						    testPin = in.nextInt();
-			            }
-						catch (InputMismatchException e){
-			                System.out.println("Invalid pin");
-							in.nextLine();
-			                continue;
-			            }
-						in.nextLine();
-						if (testNum != null && testPin != null)
-						    this.currentAccount = this.database.getAccount(testNum);
-						if (this.currentAccount == null)
-							System.out.println("Incorrect information, please try again");
-					}
+				Long testNum = (long) 0;
+				String testPin = "";
+				System.out.println("Please enter your account number.");
+				testNum = in.nextLong();
+				BankAccount = database.getAccount(testNum);
+				
+				System.out.print("Please enter your PIN.");
+				testPin = in.nextLine();
+
+				while(testNum == null || !(testPin.equals(BankAccount.getAccountHolder().getPIN())) || testNum != BankAccount.getAccountNumber() || BankAccount.getAccountHolder().getOpen().equals("N")){
+					System.out.println("Please enter your correct account number.");
+					testNum = in.nextLong();
+					BankAccount = database.getAccount(testNum);
+					System.out.print("Please enter your correct PIN.");
+					testPin = in.nextLine();
+				}
 					System.out.println("Please select 1 to deposit; 2 to withdraw; 3 to see your account balance; 4 to transfer funds ; 5 to view your personal information;" + 
 							"					+ \"6 to edit your personal information; 7 to close your account; 8 to Save Changes and exit.");
 					try {
@@ -131,24 +114,19 @@ public class ATM {
 									System.out.println("Thanks for that!");
 								}
 								else if (p == 1) {
-									currentAccount.setOpen("N");
+									AccountHolder.setOpen("N");
 								}
 							case '8':
 								//log out and save
 								System.out.println("Logging out");
-								try {
-									this.database.updateAccount(this.currentAccount, null);
-								}
-								catch(IOException e) {
-									System.out.println("Could not update account!!!");
-								}
-									this.currentAccount = null;
+								this.database.updateAccount(this.currentAccount, null);
+								this.currentAccount = null;
 							}
 						}
 					catch (StringIndexOutOfBoundsException e) {
 						System.out.println("Invalid option");
 					}
-					return false;
+					
 			case '2':
 				this.createAccount();
 				break;
@@ -156,10 +134,10 @@ public class ATM {
                 close();
                 break;
 		}
-		return true;	
+			
 	}
 
-    private void createAccount() {
+    private void createAccount() throws IOException {
     	System.out.print("Please enter your first name.");
 		String firstName = in.nextLine();
 		System.out.print("Please enter your last name");

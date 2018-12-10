@@ -21,6 +21,7 @@ public class AccountHolder {
 		private String city;
 		private String state;
 		private String zipcode;
+		private String open;
 		
 		public AccountHolder(String PIN, String firstName, String lastName, String dob, String telephone, String stAddress, String city, String state, String zipcode) {
 			this.PIN = PIN;
@@ -32,45 +33,8 @@ public class AccountHolder {
 			this.city = city;
 			this.state = state;
 			this.zipcode = zipcode;
+			this.setOpen(open);
 		}
-		
-		/*public void newUser (Scanner in) {
-			System.out.print("Please enter your first name.");
-			firstName = in.nextLine();
-			System.out.print("Please enter your last name");
-			lastName = in.nextLine();
-			while (dob.length() != 8) {
-				System.out.print("Please enter your date of birth in the following format: YYYYMMDD");
-				dob = in.nextLine();
-				if (String.valueOf(dob).length() != 8) {
-					System.out.println("Please enter your date of birth in the correct format.");
-				}
-			}
-			while (telephone.length() != 10) {
-				System.out.print("Please enter your telephone number; ten digits only.");
-				telephone = in.nextLine();
-				if (String.valueOf(telephone).length() != 10) {
-					System.out.println("Invalid telephone number length.");
-				}
-			}
-			System.out.print("What is your street address?");
-			stAddress = in.nextLine();
-			System.out.print("What is the city/town called that you reside in?");
-			city = in.nextLine();
-			while (zipcode.length() != 5)
-				System.out.print("What is your resident state abbreviated as (ex. New Jersey should be typed as NJ)?");
-				state = in.nextLine();
-				if (String.valueOf(state).length() != 2) {
-					System.out.println("Invalid state abbreviaion. Example: New Jersey should be typed as NJ");
-				}
-			while (String.valueOf(PIN).length() != 4) {
-					System.out.print("Enter a 4 digit numerical PIN.");
-					PIN = in.nextLine();
-					if (String.valueOf(PIN).length() != 4 ){
-						System.out.println("Invalid PIN");
-					}
-					}
-		}*/
 		
 		public String getPIN() {
 			return PIN;
@@ -138,6 +102,14 @@ public class AccountHolder {
 		}
 		public String gettelephone() {
 			return telephone;
+		}
+		
+		public String getOpen() {
+			return open;
+		}
+		
+		public void setOpen(String open) {
+			this.open = open;
 		}
 		
 		public void printpersonalInfo() {
