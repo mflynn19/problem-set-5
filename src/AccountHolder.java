@@ -112,44 +112,39 @@ public class AccountHolder {
 			this.open = open;
 		}
 		
-		public void printpersonalInfo() {
-			System.out.println(firstName + " " + lastName);
-			System.out.println(dob);
-			System.out.println(stAddress + " " + city + ", " + state + zipcode);
-			System.out.println(telephone);
-		}
-		public boolean updatePersonalInfo(Scanner in) {
+		public void updatePersonalInfo(Scanner in) {
 			System.out.println("What would you like to update? 1 for PIN, 2 for telephone, 3 for address");
-			switch (in.nextLine().toLowerCase().charAt(0)) {
-			case '1': 
-				this.setPIN(PIN);
-				System.out.println("What is your current PIN?");
-				int opin = in.nextInt();
-				if (Integer.toString(opin) == PIN) {
-					System.out.println("Please enter your new PIN.");
-					String nPIN = in.nextLine();
-					if (nPIN.matches("\\d\\d\\d\\d")) {
-						this.PIN = nPIN;
-				}
-			}		
-			case '2':
-				System.out.println("What is your updated telephone number?");
-				this.settelephone(in.nextLine());
-				return true;
-			case '3':
-				System.out.println("What is your new street address?");
-				stAddress = in.nextLine();
-				System.out.println("What is your new city named?");
-				city = in.nextLine();
-				System.out.println("What is your new state abbreviation?");
-				state = in.nextLine();
-				System.out.println("What is your new zipcode?");
-				zipcode = in.nextLine();
-				return true;
-			default:
-				System.out.println("Invalid input please try again.");
-				return false;
-		}
+			switch (in.next().charAt(0)) {
+				case '1': 
+					String nPIN = " ";
+					System.out.println("What would you like your new PIN to be?");
+					in.nextLine();
+					nPIN = in.nextLine();
+					this.PIN = nPIN;
+					break;
+				case '2':
+					System.out.println("What is your updated telephone number?");
+					this.settelephone(in.nextLine());
+					in.nextLine();
+					break;
+				case '3':
+					System.out.println("What is your new street address?");
+					stAddress = in.nextLine();
+					in.nextLine();
+					System.out.println("What is your new city named?");
+					city = in.nextLine();
+					in.nextLine();
+					System.out.println("What is your new state abbreviation?");
+					state = in.nextLine();
+					in.nextLine();
+					System.out.println("What is your new zipcode?");
+					zipcode = in.nextLine();
+					in.nextLine();
+					break;
+				default:
+					System.out.println("Invalid input please try again.");
+					
+			}
 	}
 	
 }

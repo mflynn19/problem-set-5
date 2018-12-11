@@ -61,12 +61,12 @@ public class BankAccount {
 		}
 	}
 	
-	public double withdraw(double amount) {
-		if (balance >= amount && amount > 0) {
-			balance -= amount;
+	public double withdraw(double takeout) {
+		if (balance >= takeout && takeout > 0) {
+			balance -= takeout;
 			return 2;
 		}
-		else if (0 > amount) {
+		else if (0 > takeout) {
 			return 1;
 		}
 		else {

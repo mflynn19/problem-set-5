@@ -8,6 +8,6 @@
 10000000801234.56           Young               Sharon         197808175558901234123 St. George Lane           Summit                        NJ07901Y
 10000000909870.00           Peterson            Andrew         197909185559012345123 Lake Avenue               Clark                         NJ07066N
 10000001009870.00           Flynn               Meghan         2000121590876543211776 raritan rd               Scotch Plains                 NJ09876Y
-10000001112340.00           brown               kylie          20010501908765432110 Stiles St                  Westfield                     NJ09876Y
+100000011123440.00          brown               kylie          20010501908765432110 Stiles St                  Westfield                     NJ09876Y
 10000001212340.00           Smith               John           19961219123456789140 main Street                Scotch Plains                 NJ09876Y
-10000001312340.00           Wilson              Ryan           197005055555555555123 Ocean Ave                 Pt. Pleasant                  NJ12345Y
+100000013123420.00          Wilson              Ryan           19700505          123 Ocean Ave                 Pt. Pleasant                  NJ12345N

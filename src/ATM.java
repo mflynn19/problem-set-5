@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 
 public class ATM {
-	private BankAccount currentAccount;
+	//private BankAccount currentAccount;
 	private BankAccount BankAccount;
 	public AccountHolder AccountHolder;
 	private Database database;
@@ -65,17 +65,25 @@ public class ATM {
 					testPin = in.nextLine();
 					BankAccount = database.getAccount(testNum);
 				}
-					System.out.println("Please select 1 to deposit; 2 to withdraw; 3 to see your account balance; 4 to transfer funds ; 5 to view your personal information;" + 
-							"					+ \"6 to edit your personal information; 7 to close your account; 8 to Save Changes and exit.");
+					
 					char select;
 					do {
+						System.out.println(
+								"Please select...\n"
+								+ "1 to deposit;\n "
+								+ "2 to withdraw;\n"
+								+ "3 to transfer funds;\n"
+								+ "4 to see your account balance;\n "
+								+ "5 to view your personal information;\n"
+								+ "6 to edit your personal information;\n"
+								+ "7 to close your account;\n"
+								+ "8 to save changes & exit.\n");
 					select = in.next().charAt(0);
 					switch (select) {
 						case '1':
 							//deposit
 							System.out.println("How much money would you like to deposit?");
 							Double amount = in.nextDouble();
-							//this.BankAccount.deposit(amount);
 							returnval = BankAccount.deposit(amount);
 							if(returnval == 0){
 								System.out.println("Invalid deposit amount.");
@@ -84,13 +92,14 @@ public class ATM {
 								System.out.println("Unable to complete transaction. Please see a bank teller.");
 							}
 							else {
-								System.out.println("Your balance is "  + BankAccount.getBalance());
+								System.out.println("Thank you for depositing $" + amount);
 							}
-							//go back to menu
 							break;
 						case '2':
 							//withdraw
 							System.out.println("How much money would you like to withdraw?");
+							Double takeout = in.nextDouble();
+							returnval = BankAccount.withdraw(takeout);
 							if(returnval == 0){
 								System.out.println("Insufficient funds.");
 							}
@@ -98,9 +107,8 @@ public class ATM {
 								System.out.println("Invalid withdraw amount.");
 							}
 							else if (returnval == 2){
-								System.out.println("Your balance is" + BankAccount.getBalance());
+								System.out.println("Thank you for withdrawing $" + takeout);
 							}
-							//go back to menu
 							break;
 						case '3':
 							//transfer
@@ -120,33 +128,37 @@ public class ATM {
 							break;
 						case '4':
 							//current balance
-							System.out.println("Your current balance is: $" + String.format("%,10.2f", currentAccount.getBalance()));
+							System.out.println("Your current balance is: $" + String.format("%,10.2f", BankAccount.getBalance()));
 							break;
 						case '5':
 							//see personal info
-							this.currentAccount.getAccountHolder().printpersonalInfo();
-							in.nextLine();
+							System.out.print(BankAccount.getAccountHolder().getfirstName()+ " ");
+							System.out.println(BankAccount.getAccountHolder().getlastName());
+							System.out.println(BankAccount.getAccountHolder().getDOB());
+							System.out.println(BankAccount.getAccountHolder().getstAddress() + " " + BankAccount.getAccountHolder().getcity() + ", " + BankAccount.getAccountHolder().getstate() + BankAccount.getAccountHolder().getzipcode());
+							System.out.println(BankAccount.getAccountHolder().gettelephone());
 							break;
+							
 						case '6':
 							//update personal info
-							this.currentAccount.getAccountHolder().updatePersonalInfo(in);
+							BankAccount.getAccountHolder().updatePersonalInfo(in);
 							break;
 						case '7':
 							//close account with bank
 							System.out.println("To close your account with the Bank of UCVTS please press 1; to cancel press 2.");
 							int p = in.nextInt();
-							if (p == 2) {
-								System.out.println("Thanks for that!");
+							if (p == 1) {
+								BankAccount.getAccountHolder().setOpen('N');
 							}
-							else if (p == 1) {
-								AccountHolder.setOpen('N');
+							else{
+								System.out.println("Thanks for that!");
 							}
 							break;
 						case '8':
 							//log out and save
-							System.out.println("Logging out");
-							this.database.updateAccount(this.currentAccount, destination);
-							this.currentAccount = null;
+							System.out.println("Logging out...");
+							database.updateAccount(BankAccount, destination);
+							menu();
 							break;
 						}
 					}while (select != '7' || select != '8');
